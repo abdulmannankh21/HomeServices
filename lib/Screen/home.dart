@@ -91,91 +91,92 @@ class _HomeScreenState extends State<HomeScreen> {
                           elevation: 5,
                           borderRadius: BorderRadius.circular(25),
 
-                          child: Container(
-                            height: size.height /6,
-                            width: size.width /3,
-                            decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.white,
-                                size: 45,
+                            child: Container(
+                              height: size.height /6,
+                              width: size.width /3,
+                              decoration: BoxDecoration(
+                                color: Colors.amber,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                  size: 45,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: size.height * 0.01,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap:(){
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (ctx) => AddJob()));
-                  },
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(25),
-                    child: Container(
-                      height: size.height /6,
-                      width: size.width /3,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.add_sharp,
-                          color: Colors.white,
-                          size: 45,
+            SizedBox(
+              height: size.height * 0.01,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap:(){
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (ctx) => AddJob()));
+                    },
+                    child: Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(25),
+                      child: Container(
+                        height: size.height /6,
+                        width: size.width /3,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.add_sharp,
+                            color: Colors.white,
+                            size: 45,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                InkWell(
-                  onTap: () {
-                    // Navigator.of(context)
-                    //     .push(MaterialPageRoute(builder: (ctx) => ProfileScreen()));
-                  },
-                  child: Material(
-                    elevation: 5,
-                    borderRadius: BorderRadius.circular(25),
-                    child: Container(
-                      height: size.height /6,
-                      width: size.width /3,
-                      decoration: BoxDecoration(
-                        color: Colors.amber,
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.chat,
-                          color: Colors.white,
-                          size: 45,
+                  InkWell(
+                    onTap: () {
+                      // Navigator.of(context)
+                      //     .push(MaterialPageRoute(builder: (ctx) => ProfileScreen()));
+                    },
+                    child: Material(
+                      elevation: 5,
+                      borderRadius: BorderRadius.circular(25),
+                      child: Container(
+                        height: size.height /6,
+                        width: size.width /3,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.chat,
+                            color: Colors.white,
+                            size: 45,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

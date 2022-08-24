@@ -255,35 +255,49 @@ class _JobPostWidgetState extends State<JobPostWidget> {
                       ),
                     )
                   : InkWell(
-                      onTap: () async{
+                      onTap: () async {
                         setState(() {
                           _isAcceptedLoading = !_isAcceptedLoading;
                         });
 
-                        DocumentReference myDoc = FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid);
-
+                        DocumentReference myDoc = FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(FirebaseAuth.instance.currentUser!.uid);
                         DocumentSnapshot laoshe = await myDoc.get();
-                        Map<String, dynamic> maoshe = laoshe.data() as Map<String, dynamic>;
 
-                        DocumentSnapshot otherUserData = await FirebaseFirestore.instance.collection('users').doc(widget.snapshot['postedBy']).get();
-                        Map<String, dynamic> otherUserMap = otherUserData.data() as Map<String, dynamic>;
+                        Map<String, dynamic> maoshe =
+                            laoshe.data() as Map<String, dynamic>;
 
-                        if(!maoshe.containsKey('jobAccepted') && maoshe['jobAccepted'] != true){
+                        DocumentSnapshot otherUserData = await FirebaseFirestore
+                            .instance
+                            .collection('users')
+                            .doc(widget.snapshot['postedBy'])
+                            .get();
+                        print(otherUserData);
+                        Map<String, dynamic> otherUserMap =
+                            otherUserData.data() as Map<String, dynamic>;
+                        if (!maoshe.containsKey('jobAccepted') &&
+                            maoshe['jobAccepted'] == true) {
                           String chatId = '';
-                          chatId = chatRoomId(FirebaseAuth.instance.currentUser!.uid, widget.snapshot['postedBy']);
+                          chatId = chatRoomId(
+                              FirebaseAuth.instance.currentUser!.uid,
+                              widget.snapshot['postedBy']);
                           await myDoc.set({
-                            'jobAccepted' : true,
-                            'acceptedJobId' : widget.snapshot['id'],
-                            'jobPostedBy' : widget.snapshot['postedBy'],
-                            'chatId' : chatId
+                            'jobAccepted': true,
+                            'acceptedJobId': widget.snapshot['id'],
+                            'jobPostedBy': widget.snapshot['postedBy'],
+                            'chatId': chatId
                           }, SetOptions(merge: true));
 
-                          await otherUserData.reference.set({
-                            'chatId' : chatId
-                          }, SetOptions(merge: true));
-                          await widget.snapshot.reference.update({'status' : 'accepted'}).then((value) => print('Ho gya e oye'));
-                        }else{
-                          showInSnackBar(context: context, message: "You can't select more than one jobs.");
+                          await otherUserData.reference
+                              .set({'chatId': chatId}, SetOptions(merge: true));
+                          await widget.snapshot.reference
+                              .update({'status': 'accepted'}).then(
+                                  (value) => print('Ho gya e oye'));
+                        } else {
+                          showInSnackBar(
+                              context: context,
+                              message: "You can't select more than one jobs.");
                         }
                       },
                       child: Container(
