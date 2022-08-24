@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:homeservices/Screen/home.dart';
 import 'package:homeservices/widgets/custom_text_field.dart';
 
 class PostJobDetails extends StatefulWidget {
@@ -128,6 +129,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(height: 10,),
               CustomTextfield(
                 inputType: TextInputType.text,
                 hint: 'Job Title',
@@ -137,6 +139,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
+              SizedBox(height: 10,),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -161,6 +164,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   },
                 ),
               ),
+              SizedBox(height: 10,),
               CustomTextfield(
                 inputType: TextInputType.number,
                 hint: 'Hourly Rate',
@@ -170,6 +174,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
+              SizedBox(height: 10,),
               CustomTextfield(
                 inputType: TextInputType.number,
                 hint: 'Hours',
@@ -179,6 +184,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
+              SizedBox(height: 10,),
               CustomTextfield(
                 inputType: TextInputType.emailAddress,
                 hint: 'Email',
@@ -188,6 +194,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
+              SizedBox(height: 10,),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
@@ -212,6 +219,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   },
                 ),
               ),
+              SizedBox(height: 10,),
               CustomTextfield(
                 inputType: TextInputType.number,
                 hint: 'How Many Agents?',
@@ -221,6 +229,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
+              SizedBox(height: 10,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -250,6 +259,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   ),
                 ],
               ),
+              SizedBox(height: 10,),
               InkWell(
                 onTap: () {
                   setState(() {
@@ -263,6 +273,10 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                     email = emailController.text;
                     addJobPost();
                     clearText();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    );
                   });
                 },
                 child: Center(
@@ -281,6 +295,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   ),
                 ),
               ),
+              SizedBox(height: 10,),
             ],
           ),
         ),
