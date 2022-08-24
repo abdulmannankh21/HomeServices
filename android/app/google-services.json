@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "83599422717",
+    "project_id": "homeservices-afdfb",
+    "storage_bucket": "homeservices-afdfb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83599422717:android:19b0ccaf4df9339b8d3a94",
+        "android_client_info": {
+          "package_name": "com.example.homeservices"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83599422717-keoa4allon43a431fejdubv6qds32rhf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.homeservices",
+            "certificate_hash": "a968e9b63fdfe461a66e34c5effaea601d3ff463"
+          }
+        },
+        {
+          "client_id": "83599422717-diau48f0hb29phpv8ql1acapolb180eu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqzK4wuSQ6lEwzEuJWf2JKWPNJTV5upmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83599422717-diau48f0hb29phpv8ql1acapolb180eu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
