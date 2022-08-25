@@ -66,64 +66,82 @@ class ChatRoom extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: size.height / 1.25,
-              width: size.width,
-              child: StreamBuilder<QuerySnapshot>(
-                stream: _firestore
-                    .collection('chatroom')
-                    .doc(chatRoomId)
-                    .collection('chats')
-                    .orderBy("time", descending: false)
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.data != null) {
-                    return ListView.builder(
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        Map<String, dynamic> map = snapshot.data!.docs[index]
-                            .data() as Map<String, dynamic>;
-                        return messages(size, map, context);
-                      },
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-            ),
-            Container(
-              height: size.height / 10,
-              width: size.width,
-              alignment: Alignment.center,
-              child: Container(
-                height: size.height / 12,
-                width: size.width / 1.1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Container(
-                      height: size.height / 17,
-                      width: size.width / 1.3,
-                      child: TextField(
-                        controller: _message,
-                        decoration: InputDecoration(
-                            hintText: "Send Message",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            )),
-                      ),
-                    ),
-                    IconButton(
-                        icon: Icon(Icons.send), onPressed: onSendMessage),
-                  ],
+        physics:BouncingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Column(
+            children: [
+              Container(
+                height: size.height / 1.25,
+                width: size.width,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: _firestore
+                      .collection('chatroom')
+                      .doc(chatRoomId)
+                      .collection('chats')
+                      .orderBy("time", descending: false)
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.data != null) {
+                      return ListView.builder(
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          Map<String, dynamic> map = snapshot.data!.docs[index]
+                              .data() as Map<String, dynamic>;
+                          return messages(size, map, context);
+                        },
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
                 ),
               ),
-            ),
-          ],
+              Container(
+                height: size.height / 10,
+                width: size.width,
+                decoration: BoxDecoration(
+                  color: Colors.amber,
+                    borderRadius:  BorderRadius.only(
+                      topLeft:  Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
+                    ),
+                ),
+                child: Container(
+                  height: size.height / 12,
+                  width: size.width / 1.1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: size.height / 17,
+                          width: size.width / 1.3,
+
+                          child: TextField(
+                            style: TextStyle(color: Colors.white),
+                            controller: _message,
+                            decoration: InputDecoration(
+                                hintText: "Send Message",
+                                hintStyle: TextStyle(color: Colors.white),
+                                focusColor: Colors.white,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white,width: 2.0),
+                                  borderRadius: BorderRadius.circular(8),
+                                )),
+                          ),
+                        ),
+                        IconButton(
+                            icon: Icon(Icons.send,color: Colors.white,), onPressed: onSendMessage),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
