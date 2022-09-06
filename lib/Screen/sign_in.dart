@@ -24,6 +24,7 @@ class _SignInState extends State<SignIn> {
 
   // string for displaying the error Message
   String? errorMessage;
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -76,22 +77,41 @@ class _SignInState extends State<SignIn> {
             SizedBox(
               height: 20,
             ),
-            CustomTextfield(
-              hint: 'Password',
-              inputType: TextInputType.visiblePassword,
-              obstext: true,
-              onSaved: (value) {},
-              textInputAction: TextInputAction.next,
-              validator: (value) {
-                RegExp regex = new RegExp(r'^.{6,}$');
-                if (value!.isEmpty) {
-                  return ("Password is required for login");
-                }
-                if (!regex.hasMatch(value)) {
-                  return ("Enter Valid Password(Min. 6 Character)");
-                }
-              },
-              controller: passwordController,
+            Container(
+              width: size.width * 0.8,
+              height: size.height * 0.06,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                      width: 1, color: Colors.black, style: BorderStyle.solid)),
+              child: TextFormField(
+                obscureText: _isObscure,
+                decoration: InputDecoration(
+                    hintText: "Password",
+                    hintStyle: TextStyle(color: Colors.black),
+                    contentPadding: EdgeInsets.all(15),
+                    border: InputBorder.none,
+                    suffixIcon: IconButton(
+                        icon: Icon(
+                            _isObscure ? Icons.visibility : Icons.visibility_off,color: Colors.black,),
+                        onPressed: () {
+                          setState(() {
+                            _isObscure = !_isObscure;
+                          });
+                        })),
+                onSaved: (value) {},
+                textInputAction: TextInputAction.next,
+                validator: (value) {
+                  RegExp regex = new RegExp(r'^.{6,}$');
+                  if (value!.isEmpty) {
+                    return ("Password is required for login");
+                  }
+                  if (!regex.hasMatch(value)) {
+                    return ("Enter Valid Password(Min. 6 Character)");
+                  }
+                },
+                controller: passwordController,
+              ),
             ),
             SizedBox(
               height: 20,
@@ -102,8 +122,8 @@ class _SignInState extends State<SignIn> {
               },
               child: Center(
                 child: Container(
-                  width: size.width,
-                  height: size.height * 0.05,
+                  width: size.width * 0.8,
+                  height: size.height * 0.06,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.black),

@@ -68,7 +68,6 @@ class _PostJobDetailsState extends State<PostJobDetails> {
   CollectionReference Job = FirebaseFirestore.instance.collection('job');
 
   Future<void> addJobPost() {
-
     return Job.add({
       'id': Job.doc().id,
       'job title': jobtitle,
@@ -78,7 +77,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
       'email': email,
       'location': location,
       'Agents': agents,
-      'date time':datetime,
+      'date time': datetime,
       'status': 'pending',
       'postedBy': FirebaseAuth.instance.currentUser!.uid
     })
@@ -129,7 +128,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               CustomTextfield(
                 inputType: TextInputType.text,
                 hint: 'Job Title',
@@ -139,12 +140,16 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                        width: 1, color: Colors.black, style: BorderStyle.solid)),
+                        width: 1,
+                        color: Colors.black,
+                        style: BorderStyle.solid)),
                 child: TextFormField(
                   maxLines: 10,
                   keyboardType: TextInputType.text,
@@ -164,7 +169,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   },
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               CustomTextfield(
                 inputType: TextInputType.number,
                 hint: 'Hourly Rate',
@@ -174,7 +181,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               CustomTextfield(
                 inputType: TextInputType.number,
                 hint: 'Hours',
@@ -184,7 +193,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               CustomTextfield(
                 inputType: TextInputType.emailAddress,
                 hint: 'Email',
@@ -194,12 +205,16 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                        width: 1, color: Colors.black, style: BorderStyle.solid)),
+                        width: 1,
+                        color: Colors.black,
+                        style: BorderStyle.solid)),
                 child: TextFormField(
                   maxLines: 3,
                   keyboardType: TextInputType.text,
@@ -219,7 +234,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   },
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               CustomTextfield(
                 inputType: TextInputType.number,
                 hint: 'How Many Agents?',
@@ -229,7 +246,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 onSaved: (value) {},
                 textInputAction: TextInputAction.next,
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -254,28 +273,32 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                     // format the value based on the user's locale settings.
                     child: Text(
                       '${dateTime.month}-${dateTime.day}-${dateTime.year}   |    ${dateTime.hour}:${dateTime.minute}',
-                      style: const TextStyle(fontSize: 22.0, color: Colors.amber),
+                      style:
+                          const TextStyle(fontSize: 22.0, color: Colors.amber),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               InkWell(
                 onTap: () {
                   setState(() {
                     jobtitle = titlejobController.text;
                     jobdiscription = jobdiscriptionController.text;
-                    hourlyrate=hourlyrateController.text;
-                    hours=hoursController.text;
-                    location=locationController.text;
-                    agents=agentsController.text;
-                    datetime=dateTime;
+                    hourlyrate = hourlyrateController.text;
+                    hours = hoursController.text;
+                    location = locationController.text;
+                    agents = agentsController.text;
+                    datetime = dateTime;
                     email = emailController.text;
                     addJobPost();
                     clearText();
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
                     );
                   });
                 },
@@ -295,7 +318,9 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
             ],
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:homeservices/Screen/home.dart';
-import 'package:homeservices/Screen/signup.dart';
+import 'package:homeservices/Screen/sign_in.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -23,13 +23,13 @@ class _SplashState extends State<Splash> {
         const Duration(
           seconds: 3,
         ),
-            () {});
+        () {});
     if (FirebaseAuth.instance.currentUser != null) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
     } else {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const SignUp()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const SignIn()));
     }
   }
 

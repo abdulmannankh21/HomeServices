@@ -15,7 +15,6 @@ class ChatRoom extends StatelessWidget {
 
   File? imageFile;
 
-
   void onSendMessage() async {
     if (_message.text.isNotEmpty) {
       Map<String, dynamic> messages = {
@@ -45,7 +44,7 @@ class ChatRoom extends StatelessWidget {
         backgroundColor: Colors.amber,
         title: StreamBuilder<DocumentSnapshot>(
           stream:
-          _firestore.collection("users").doc(userMap['uid']).snapshots(),
+              _firestore.collection("users").doc(userMap['uid']).snapshots(),
           builder: (context, snapshot) {
             if (snapshot.data != null) {
               return Container(
@@ -66,7 +65,7 @@ class ChatRoom extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        physics:BouncingScrollPhysics(),
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),
           child: Column(
@@ -103,10 +102,10 @@ class ChatRoom extends StatelessWidget {
                 width: size.width,
                 decoration: BoxDecoration(
                   color: Colors.amber,
-                    borderRadius:  BorderRadius.only(
-                      topLeft:  Radius.circular(30.0),
-                      topRight: Radius.circular(30.0),
-                    ),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
+                  ),
                 ),
                 child: Container(
                   height: size.height / 12,
@@ -119,7 +118,6 @@ class ChatRoom extends StatelessWidget {
                         Container(
                           height: size.height / 17,
                           width: size.width / 1.3,
-
                           child: TextField(
                             style: TextStyle(color: Colors.white),
                             controller: _message,
@@ -128,13 +126,18 @@ class ChatRoom extends StatelessWidget {
                                 hintStyle: TextStyle(color: Colors.white),
                                 focusColor: Colors.white,
                                 focusedBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white,width: 2.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.white, width: 2.0),
                                   borderRadius: BorderRadius.circular(8),
                                 )),
                           ),
                         ),
                         IconButton(
-                            icon: Icon(Icons.send,color: Colors.white,), onPressed: onSendMessage),
+                            icon: Icon(
+                              Icons.send,
+                              color: Colors.white,
+                            ),
+                            onPressed: onSendMessage),
                       ],
                     ),
                   ),
@@ -150,50 +153,49 @@ class ChatRoom extends StatelessWidget {
   Widget messages(Size size, Map<String, dynamic> map, BuildContext context) {
     return map['type'] == "text"
         ? Container(
-      width: size.width,
-      alignment: map['sendby'] == _auth.currentUser!.uid
-          ? Alignment.centerRight
-          : Alignment.centerLeft,
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.amberAccent,
-        ),
-        child: Text(
-          map['message'],
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w400,
-            color: Colors.black,
-          ),
-        ),
-      ),
-    )
-        : Container(
-      height: size.height / 2.5,
-      width: size.width,
-      padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-      alignment: map['sendby'] == _auth.currentUser!.displayName
-          ? Alignment.centerRight
-          : Alignment.centerLeft,
-      child: InkWell(
-
-        child: Container(
-          height: size.height / 2.5,
-          width: size.width / 2,
-          decoration: BoxDecoration(border: Border.all()),
-          alignment: map['message'] != "" ? null : Alignment.center,
-          child: map['message'] != ""
-              ? Image.network(
-            map['message'],
-            fit: BoxFit.cover,
+            width: size.width,
+            alignment: map['sendby'] == _auth.currentUser!.uid
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            child: Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+              margin: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.amberAccent,
+              ),
+              child: Text(
+                map['message'],
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           )
-              : CircularProgressIndicator(),
-        ),
-      ),
-    );
+        : Container(
+            height: size.height / 2.5,
+            width: size.width,
+            padding: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
+            alignment: map['sendby'] == _auth.currentUser!.displayName
+                ? Alignment.centerRight
+                : Alignment.centerLeft,
+            child: InkWell(
+              child: Container(
+                height: size.height / 2.5,
+                width: size.width / 2,
+                decoration: BoxDecoration(border: Border.all()),
+                alignment: map['message'] != "" ? null : Alignment.center,
+                child: map['message'] != ""
+                    ? Image.network(
+                        map['message'],
+                        fit: BoxFit.cover,
+                      )
+                    : CircularProgressIndicator(),
+              ),
+            ),
+          );
   }
 }
 

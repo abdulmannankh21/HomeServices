@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:homeservices/Screen/add_job.dart';
 import 'package:homeservices/Screen/jobs_list.dart';
 import 'package:homeservices/Screen/profile.dart';
+import 'package:homeservices/Screen/sign_in.dart';
 
 import 'chatScreen.dart';
 
@@ -50,9 +51,21 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: Colors.amber,
-        title: const Text(
-          "Servo",
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text(
+              "Servo",
+            ),
+            InkWell(
+                onTap: (){
+               logout(context);
+                },
+                child
+                : Icon(Icons.logout_sharp))
+          ],
         ),
+
       ),
       body: Column(
         children: [
@@ -245,4 +258,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
+// the logout function
+Future<void> logout(BuildContext context) async {
+  await FirebaseAuth.instance.signOut();
+  Navigator.of(context)
+      .pushReplacement(MaterialPageRoute(builder: (context) => SignIn()));
 }

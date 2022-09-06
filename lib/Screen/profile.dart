@@ -53,38 +53,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   backgroundImage: AssetImage('assets/empty_dp.jpg'),
                 ),
               ),
-              (loggedInUser.Name != null)?
-                Text("${loggedInUser.Name}",
-                  style: TextStyle(
+              (loggedInUser.Name != null)
+                  ? Text(
+                      "${loggedInUser.Name}",
+                      style: TextStyle(
+                          color: Colors.amber,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700),
+                    )
+                  : Text(""),
+              (loggedInUser.About != null)
+                  ? Text(
+                      "${loggedInUser.About}",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700),
+                    )
+                  : CircularProgressIndicator(
                       color: Colors.amber,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700),
-                ):Text(""),
-              (loggedInUser.About != null)?
-              Text("${loggedInUser.About}",
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700),
-              ):CircularProgressIndicator(
-                color: Colors.amber,
-                strokeWidth: 3,
+                      strokeWidth: 3,
+                    ),
+              SizedBox(
+                height: 10,
               ),
-              SizedBox(height: 10,),
-              (loggedInUser.FieldDiscription!= null)?
-              Text("${loggedInUser.FieldDiscription}",
-              textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
-              ):Text(""),
-              ActionChip(
-                backgroundColor: Colors.black,
-                  label: Text("Logout",style: TextStyle(color: Colors.white),),
-                  onPressed: () {
-                    logout(context);
-                  }),
+              (loggedInUser.FieldDiscription != null)
+                  ? Text(
+                      "${loggedInUser.FieldDiscription}",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    )
+                  : Text(""),
+              // ActionChip(
+              //     backgroundColor: Colors.black,
+              //     label: Text(
+              //       "Logout",
+              //       style: TextStyle(color: Colors.white),
+              //     ),
+              //     onPressed: () {
+              //       logout(context);
+              //     }),
             ],
           ),
         ),
@@ -93,9 +104,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-// the logout function
-Future<void> logout(BuildContext context) async {
-  await FirebaseAuth.instance.signOut();
-  Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => SignIn()));
-}
+// // the logout function
+// Future<void> logout(BuildContext context) async {
+//   await FirebaseAuth.instance.signOut();
+//   Navigator.of(context)
+//       .pushReplacement(MaterialPageRoute(builder: (context) => SignIn()));
+// }

@@ -27,8 +27,11 @@ class CustomTextfield extends StatefulWidget {
 class _CustomTextfieldState extends State<CustomTextfield> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Center(
       child: Container(
+        width: size.width * 0.8,
+        height: size.height * 0.06,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
@@ -45,12 +48,8 @@ class _CustomTextfieldState extends State<CustomTextfield> {
           onChanged: (value) {
             // Do something
           },
-          validator: (value){
-
-          },
-          onSaved: (value){
-
-          },
+          validator: (value) {},
+          onSaved: (value) {},
         ),
       ),
     );
