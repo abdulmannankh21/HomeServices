@@ -116,9 +116,10 @@ class ChatRoom extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          height: size.height / 17,
+                          height: size.height / 12,
                           width: size.width / 1.3,
                           child: TextField(
+                            maxLines: 5,
                             style: TextStyle(color: Colors.white),
                             controller: _message,
                             decoration: InputDecoration(
@@ -185,7 +186,8 @@ class ChatRoom extends StatelessWidget {
               child: Container(
                 height: size.height / 2.5,
                 width: size.width / 2,
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(border: Border.all(),
+                color: Colors.yellow),
                 alignment: map['message'] != "" ? null : Alignment.center,
                 child: map['message'] != ""
                     ? Image.network(

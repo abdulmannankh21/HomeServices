@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:homeservices/Screen/home.dart';
 import 'package:homeservices/widgets/custom_text_field.dart';
 
@@ -144,6 +145,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 height: 10,
               ),
               Container(
+                width: size.width * 0.8,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
@@ -209,6 +211,7 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                 height: 10,
               ),
               Container(
+                width: size.width * 0.8,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
@@ -294,6 +297,15 @@ class _PostJobDetailsState extends State<PostJobDetails> {
                     datetime = dateTime;
                     email = emailController.text;
                     addJobPost();
+                    Fluttertoast.showToast(
+                        msg: "Job Posted Successfully",
+                        toastLength: Toast.LENGTH_SHORT,
+                        gravity: ToastGravity.SNACKBAR,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.green,
+                        textColor: Colors.white,
+                        fontSize: 16.0
+                    );
                     clearText();
                     Navigator.push(
                       context,

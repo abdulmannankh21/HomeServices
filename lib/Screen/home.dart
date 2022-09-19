@@ -174,18 +174,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 InkWell(
-                  onTap: () async {
-                    DocumentReference myDoc = FirebaseFirestore.instance
-                        .collection('users').doc(
-                        FirebaseAuth.instance.currentUser!.uid);
+                  onTap: () async{
+                    DocumentReference myDoc = FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid);
 
                     DocumentSnapshot laoshe = await myDoc.get();
-                    Map<String, dynamic> maoshe = laoshe.data() as Map<
-                        String,
-                        dynamic>;
+                    Map<String, dynamic> maoshe = laoshe.data() as Map<String, dynamic>;
 
 
-                    if (maoshe.containsKey('chatId')) {
+
+                    if(maoshe.containsKey('chatId')) {
+
                       String chatId = maoshe['chatId'];
                       List<String> chatIdSplitted = chatId.split('-');
 
@@ -193,38 +191,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       print('\n');
                       print(chatIdSplitted[1]);
 
-                      if (chatIdSplitted[0] ==
-                          FirebaseAuth.instance.currentUser!.uid) {
-                        DocumentSnapshot otherUserData = await FirebaseFirestore
-                            .instance.collection('users')
-                            .doc(chatIdSplitted[1])
-                            .get();
-                        Map<String, dynamic> otherUserMap = otherUserData
-                            .data() as Map<String, dynamic>;
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) {
-                              return ChatRoom(chatRoomId: maoshe['chatId'],
-                                userMap: otherUserMap,);
-                            }));
+                      if(chatIdSplitted[0] == FirebaseAuth.instance.currentUser!.uid){
+                        DocumentSnapshot otherUserData = await FirebaseFirestore.instance.collection('users').doc(chatIdSplitted[1]).get();
+                        Map<String, dynamic> otherUserMap = otherUserData.data() as Map<String, dynamic>;
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                          return ChatRoom(chatRoomId: maoshe['chatId'], userMap: otherUserMap,);
+                        }));
                       }
-                      else {
-                        DocumentSnapshot otherUserData = await FirebaseFirestore
-                            .instance.collection('users')
-                            .doc(chatIdSplitted[0])
-                            .get();
-                        Map<String, dynamic> otherUserMap = otherUserData
-                            .data() as Map<String, dynamic>;
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) {
-                              return ChatRoom(chatRoomId: maoshe['chatId'],
-                                userMap: otherUserMap,);
-                            }));
+                      else{
+                        DocumentSnapshot otherUserData = await FirebaseFirestore.instance.collection('users').doc(chatIdSplitted[0]).get();
+                        Map<String, dynamic> otherUserMap = otherUserData.data() as Map<String, dynamic>;
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                          return ChatRoom(chatRoomId: maoshe['chatId'], userMap: otherUserMap,);
+                        }));
                       }
+
+
+
+
                     }
-                    else {
-                      showInSnackBar(
-                          message: "You have to accept offer to chat with him",
-                          context: context);
+                    else{
+                      showInSnackBar(message: "You have to accept offer to chat with him", context: context);
                     }
 
 

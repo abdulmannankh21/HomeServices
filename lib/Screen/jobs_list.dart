@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class JobsList extends StatefulWidget {
   const JobsList({Key? key}) : super(key: key);
@@ -142,7 +143,17 @@ class _JobPostWidgetState extends State<JobPostWidget> {
   bool _isRejectedLoading = false;
 
   showInSnackBar({required String message, required context}) {
-    final snackBar = SnackBar(content: Text(message, style: const TextStyle(color: Colors.black87, fontWeight: FontWeight.w700)), elevation: 10, duration: const Duration(seconds: 2), margin: const EdgeInsets.all(16), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)), behavior: SnackBarBehavior.floating, backgroundColor: Colors.amber.shade50,);
+    final snackBar = SnackBar(
+      content: Text(message,
+          style: const TextStyle(
+              color: Colors.black87, fontWeight: FontWeight.w700)),
+      elevation: 10,
+      duration: const Duration(seconds: 2),
+      margin: const EdgeInsets.all(16),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.amber.shade50,
+    );
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
@@ -263,8 +274,8 @@ class _JobPostWidgetState extends State<JobPostWidget> {
                         DocumentReference myDoc = FirebaseFirestore.instance
                             .collection('users')
                             .doc(FirebaseAuth.instance.currentUser!.uid);
-                        DocumentSnapshot laoshe = await myDoc.get();
 
+                        DocumentSnapshot laoshe = await myDoc.get();
                         Map<String, dynamic> maoshe =
                             laoshe.data() as Map<String, dynamic>;
 
@@ -273,11 +284,11 @@ class _JobPostWidgetState extends State<JobPostWidget> {
                             .collection('users')
                             .doc(widget.snapshot['postedBy'])
                             .get();
-                        print(otherUserData);
                         Map<String, dynamic> otherUserMap =
                             otherUserData.data() as Map<String, dynamic>;
+
                         if (!maoshe.containsKey('jobAccepted') &&
-                            maoshe['jobAccepted'] == true) {
+                            maoshe['jobAccepted'] != true) {
                           String chatId = '';
                           chatId = chatRoomId(
                               FirebaseAuth.instance.currentUser!.uid,
@@ -295,9 +306,14 @@ class _JobPostWidgetState extends State<JobPostWidget> {
                               .update({'status': 'accepted'}).then(
                                   (value) => print('Ho gya e oye'));
                         } else {
-                          showInSnackBar(
-                              context: context,
-                              message: "You can't select more than one jobs.");
+                          Fluttertoast.showToast(
+                              msg: "You can select only one jobs",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.SNACKBAR,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.redAccent,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
                         }
                       },
                       child: Container(
